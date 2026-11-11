@@ -5,6 +5,10 @@ alive. The simulation runs entirely on the GPU through **WebGPU**. Every shader,
 compute and render alike, is written in plain TypeScript with
 [**TypeGPU**](https://docs.swmansion.com/TypeGPU/).
 
+### ▶ [Live demo](https://mayennscp.github.io/particle-life-gpu/)
+
+Needs a browser with WebGPU: recent Chrome, Edge or Safari.
+
 <p align="center">
   <img src="docs/chasers.jpg" width="49%" alt="Chasers preset: blobs of one species hunting the next" />
   <img src="docs/orbits.jpg" width="49%" alt="Orbits preset: rings and cells forming" />
