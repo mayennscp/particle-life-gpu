@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Thousands of particles, a handful of rules, and emergent life — simulated on the GPU with TypeGPU."
+    />
+    <title>Particle Life · TypeGPU</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='10' cy='12' r='5' fill='%236e8bff'/><circle cx='22' cy='10' r='4' fill='%23ff7ab6'/><circle cx='18' cy='22' r='6' fill='%2366e0b4'/></svg>" />
+  </head>
+  <body>
+    <canvas id="canvas" aria-label="Particle simulation"></canvas>
+
+    <div id="unsupported" class="unsupported" hidden>
+      <h1>WebGPU is not available</h1>
+      <p>
+        This simulation runs entirely on your GPU through WebGPU. Try a recent
+        Chrome, Edge or Safari, or enable WebGPU in your browser's flags.
+      </p>
+      <p class="error" id="unsupported-reason"></p>
+    </div>
+
+    <button id="panel-toggle" class="panel-toggle" aria-expanded="true" aria-controls="panel">
+      Controls
+    </button>
+
+    <aside id="panel" class="panel">
+      <header class="panel-header">
+        <div>
+          <h1>Particle Life</h1>
+          <p class="subtitle">Simulated on the GPU with TypeGPU</p>
+        </div>
+        <div class="stats" aria-live="off">
+          <span id="fps">– fps</span>
+          <span id="count-label">4096 particles</span>
+        </div>
+      </header>
+
+      <section>
+        <h2>Rules</h2>
+        <div class="button-row" role="group" aria-label="Rule presets">
+          <button data-preset="random">🎲 Random</button>
+          <button data-preset="chains">🐟 Chasers</button>
+          <button data-preset="clusters">🧫 Cells</button>
+          <button data-preset="orbits">🌀 Orbits</button>
+        </div>
+        <div class="button-row">
+          <button id="mutate">Mutate</button>
+          <button id="share">Copy link</button>
+        </div>
+        <label class="slider">
+          <span>Species <output id="species-value">6</output></span>
+          <input id="species" type="range" min="2" max="8" step="1" value="6" />
+        </label>
+        <div class="matrix-wrap">
+          <div id="matrix" class="matrix" role="grid" aria-label="Attraction matrix"></div>
+          <p class="hint">
+            Row is attracted to column. Click a cell to raise it, right-click
+            or Shift+click to lower it, scroll to fine-tune.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Physics</h2>
+        <label class="slider">
+          <span>Particles <output id="count-value">4096</output></span>
+          <input id="count" type="range" min="10" max="14" step="1" value="12" />
+        </label>
+        <label class="slider">
+          <span>Interaction radius <output id="radius-value">0.20</output></span>
+          <input id="radius" type="range" min="0.05" max="0.4" step="0.01" value="0.2" />
+        </label>
+        <label class="slider">
+          <span>Force <output id="force-value">10</output></span>
+          <input id="force" type="range" min="1" max="30" step="0.5" value="10" />
+        </label>
+        <label class="slider">
+          <span>Friction <output id="friction-value">0.040</output></span>
+          <input id="friction" type="range" min="0.005" max="0.2" step="0.005" value="0.04" />
+        </label>
+        <div class="button-row">
+          <button id="respawn">Respawn</button>
+          <button id="pause" aria-pressed="false">Pause</button>
+        </div>
+      </section>
+
+      <footer class="panel-footer">
+        <p>
+          Drag to push particles away · Shift-drag or right-drag to pull ·
+          <kbd>Space</kbd> pause · <kbd>R</kbd> new rules
+        </p>
+      </footer>
+    </aside>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
